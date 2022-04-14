@@ -5,8 +5,7 @@ import pandas
 
 
 screen = turtle.Screen()
-screen.screensize(700, 700)
-screen.title("U.S. States")
+screen.title("U.S. States:")
 image = "image.gif"
 screen.addshape(image)
 turtle.shape(image)
@@ -17,19 +16,20 @@ result.hideturtle()
 
 states = pandas.read_csv("50_states.CSV")
 
-while True:
+all_states = []
+while len(all_states) < 50:
     user_input = screen.textinput(
-        title="U.s States", prompt="Enter any state you know")
+        title=f"{len(all_states)}/50 U.s States:", prompt="Enter any state you know")
 
     for st in states.state:
         if st.lower() == user_input.lower():
-
+            all_states.append(user_input)
             x_cor = int(states[states.state == st].x)
             y_cor = int(states[states.state == st].y)
             coor = (x_cor, y_cor)
-            print(coor)
             result.goto(coor)
             result.write(f"{user_input}")
+            
 
 
 turtle.mainloop()
